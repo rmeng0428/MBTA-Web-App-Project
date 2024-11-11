@@ -10,11 +10,12 @@ load_dotenv()
 # Get API keys from environment variables
 MAPBOX_TOKEN = os.getenv("MAPBOX_TOKEN")
 MBTA_API_KEY = os.getenv("MBTA_API_KEY")
+OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
 
 # Useful base URLs
 MAPBOX_BASE_URL = "https://api.mapbox.com/geocoding/v5/mapbox.places"
 MBTA_BASE_URL = "https://api-v3.mbta.com/stops"
-
+OPENWEATHER_BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
 
 def get_json(url: str) -> dict:
     """
@@ -85,17 +86,29 @@ def get_nearest_station(
     return nearest_station, wheelchair_accessible
 
 
+def get_weather(latitude: str, longitude: str) -> str:
+    """
+    Given latitude and longitude, return a string describing the current weather.
+    """
+    url = f"{OPENWEATHER_BASE_URL}?lat={latitude}&lon={longitude}&appid={OPENWEATHER_API_KEY}&units=imperial"
+    data = get_json(url)
+    weather_description = data["weather"][0]["description"]
+    temperature = data["main"]["temp"]
+    return f"{weather_description.capitalize()}, {temperature}°F"
+
+
 def find_stop_near(
     place_name: str, transportation_type: str = None
 ) -> tuple[str, str, str, bool]:
     """
-    Given a place name or address, and an optional transportation type, return the latitude, longitude, nearest MBTA stop, and whether it is wheelchair accessible.
+    Given a place name or address, and an optional transportation type, return the latitude, longitude, nearest MBTA stop, whether it is wheelchair accessible, and current weather information..
     """
     latitude, longitude = get_lat_lng(place_name)
     station_name, accessible = get_nearest_station(
         latitude, longitude, transportation_type
     )
-    return latitude, longitude, station_name, accessible
+    weather = get_weather(latitude, longitude)
+    return latitude, longitude, station_name, accessible, weather
 
 
 def main():
@@ -106,13 +119,15 @@ def main():
     transportation_type = input(
         "Enter transportation type (T, Bus, Commuter Rail, or leave blank for any): "
     )
-    latitude, longitude, station, accessible = find_stop_near(
+    latitude, longitude, station, accessible, weather = find_stop_near(
         place_name, transportation_type
     )
     accessibility = "Yes" if accessible else "No"
     print(f"Location: {place_name}")
     print(f"Latitude: {latitude}, Longitude: {longitude}")
     print(f"The nearest MBTA stop is {station}. Wheelchair accessible: {accessibility}")
+    print(f"Current weather: {weather}")
+
 
 
 if __name__ == "__main__":
