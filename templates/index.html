@@ -4,11 +4,53 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hi</title>
+    <title>Find Nearest MBTA Station</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 2rem;
+        background-color: #f7f7f7;
+      }
+      h1 {
+        color: #333;
+      }
+      form {
+        margin-top: 1rem;
+      }
+      label, input, select, button {
+        display: block;
+        margin: 0.5rem 0;
+      }
+      button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
   </head>
 
   <body>
-    <h1>Hi</h1>
-    <p>This is an amazing app to help you find the nearest MBTA station</p>
+    <h1>Welcome to the MBTA Finder</h1>
+    <p>This is an amazing app to help you find the nearest MBTA station.</p>
+    <form action="/nearest_mbta" method="post">
+      <label for="place_name">Enter a place name:</label>
+      <input type="text" id="place_name" name="place_name" placeholder="e.g., Harvard University" required />
+
+      <label for="transportation_type">Select mode of transportation:</label>
+      <select id="transportation_type" name="transportation_type">
+        <option value="">Any</option>
+        <option value="T">T (Subway)</option>
+        <option value="Bus">Bus</option>
+        <option value="Commuter Rail">Commuter Rail</option>
+      </select>
+
+      <button type="submit">Find Nearest Station</button>
+    </form>
   </body>
 </html>
