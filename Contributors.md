@@ -1,2 +1,2 @@
 - [Amy Meng](https://github.com/rmeng0428)
-- [Hatton Tong](https://github.com/hatton1012)
+- [Hatton Tong](https://github.com/Hatton1012)
