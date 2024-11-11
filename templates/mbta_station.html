@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nearest MBTA Station</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 2rem;
+        background-color: #f7f7f7;
+      }
+      h1 {
+        color: #333;
+      }
+      p {
+        color: #555;
+      }
+      a {
+        display: inline-block;
+        margin-top: 1rem;
+        text-decoration: none;
+        color: #007bff;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Nearest MBTA Station for {{ place_name }}</h1>
+    <p><strong>Latitude:</strong> {{ latitude }}</p>
+    <p><strong>Longitude:</strong> {{ longitude }}</p>
+    <p><strong>Station Name:</strong> {{ station }}</p>
+    <p><strong>Wheelchair Accessible:</strong> {{ accessible }}</p>
+    <a href="/">Back to Home</a>
+  </body>
+</html>
