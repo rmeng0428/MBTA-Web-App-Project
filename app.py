@@ -23,7 +23,7 @@ def nearest_mbta():
             return render_template('error.html', message="Place name cannot be empty.")
 
         # Call the find_stop_near function from mbta_helper
-        latitude, longitude, station, accessible = find_stop_near(place_name, transportation_type)
+        latitude, longitude, station, accessible, weather = find_stop_near(place_name, transportation_type)
         
         if station == "No nearby station found":
             return render_template('error.html', message="No nearby MBTA station found.")
@@ -34,7 +34,8 @@ def nearest_mbta():
             latitude=latitude,
             longitude=longitude,
             station=station,
-            accessible="Yes" if accessible else "No"
+            accessible="Yes" if accessible else "No",
+            weather=weather
         )
     except ValueError as e:
         return render_template('error.html', message=str(e))

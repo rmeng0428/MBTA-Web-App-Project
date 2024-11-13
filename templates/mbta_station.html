@@ -6,34 +6,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nearest MBTA Station</title>
     <style>
+      /* Set the background image for the body */
       body {
         font-family: Arial, sans-serif;
-        margin: 2rem;
-        background-color: #f7f7f7;
-      }
-      h1 {
+        margin: 0;
+        padding: 0;
+        background-image: url('/static/images/boston_background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
         color: #333;
       }
-      p {
-        color: #555;
+      /* Container for main content */
+      .container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
-      a {
+      h1, h2 {
+        color: #0056b3;
+      }
+      .info {
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        background-color: #f0f8ff;
+        border-left: 4px solid #0056b3;
+        border-radius: 5px;
+      }
+      .info p {
+        margin: 0.5rem 0;
+      }
+      .back-button {
         display: inline-block;
-        margin-top: 1rem;
+        padding: 0.6rem 1.2rem;
+        background-color: #0056b3;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
         text-decoration: none;
-        color: #007bff;
+        font-size: 1rem;
+        cursor: pointer;
       }
-      a:hover {
-        text-decoration: underline;
+      .back-button:hover {
+        background-color: #003d82;
       }
     </style>
   </head>
+
   <body>
-    <h1>Nearest MBTA Station for {{ place_name }}</h1>
-    <p><strong>Latitude:</strong> {{ latitude }}</p>
-    <p><strong>Longitude:</strong> {{ longitude }}</p>
-    <p><strong>Station Name:</strong> {{ station }}</p>
-    <p><strong>Wheelchair Accessible:</strong> {{ accessible }}</p>
-    <a href="/">Back to Home</a>
+    <div class="container">
+      <h1>Nearest MBTA Station for {{ place_name }}</h1>
+      <div class="info">
+        <h2>Station Information</h2>
+        <p><strong>Latitude:</strong> {{ latitude }}</p>
+        <p><strong>Longitude:</strong> {{ longitude }}</p>
+        <p><strong>Station Name:</strong> {{ station }}</p>
+        <p><strong>Wheelchair Accessible:</strong> {{ accessible }}</p>
+      </div>
+
+      <div class="info">
+        <h2>Current Weather</h2>
+        <p>{{ weather }}</p>
+      </div>
+
+      <a href="/" class="back-button">Back to Home</a>
+    </div>
   </body>
 </html>
